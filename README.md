@@ -31,12 +31,12 @@ Flutter Google Workspace Integrator is an open-source Flutter project designed t
 
 ### User Authentication
 
-- [x] User registration using email and password.
-- [x] User login using email and password.
+- [ ] User registration using email and password.
+- [ ] User login using email and password.
 - [ ] User logout.
 - [ ] User profile management.
-- [x] User authentication using Firebase.
-- [x] User authentication using Google.
+- [ ] User authentication using Firebase.
+- [ ] User authentication using Google.
 
 ### Google Calendar Integration
 
