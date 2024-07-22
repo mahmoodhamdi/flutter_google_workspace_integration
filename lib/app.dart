@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_apis_flutter/utils/themes/theme.dart';
+import 'package:google_apis_flutter/features/home/presentation/pages/home_page.dart';
+import 'package:google_apis_flutter/core/utils/themes/theme.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
       darkTheme: AppTheme.darkTheme,
       debugShowCheckedModeBanner: false,
       title: 'Google APIs Flutter Integrator',
-      home: const Scaffold(),
+      home: const HomePage(),
     );
   }
 }
