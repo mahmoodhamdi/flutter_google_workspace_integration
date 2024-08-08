@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_apis_flutter/features/home/presentation/pages/home_page.dart';
 import 'package:google_apis_flutter/core/utils/themes/theme.dart';
+import 'package:google_apis_flutter/features/home/presentation/pages/login_page.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       darkTheme: AppTheme.darkTheme,
       debugShowCheckedModeBanner: false,
       title: 'Google APIs Flutter Integrator',
-      home: const HomePage(),
+      home: const LoginPage(),
     );
   }
 }

@@ -1,8 +1,9 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+
 import 'package:google_apis_flutter/core/utils/constants/colors.dart';
 import 'package:google_apis_flutter/core/utils/constants/enums.dart';
-import 'package:intl/intl.dart';
 
 class HelperFunctions {
   static void showSnackBar({
