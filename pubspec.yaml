@@ -91,7 +91,7 @@ dev_dependencies:
 
   # --- Linting
   flutter_lints: ^5.0.0
-  custom_lint: ^0.6.7
+  custom_lint: ^0.7.3
   riverpod_lint: ^2.6.3
 
   # --- Codegen
