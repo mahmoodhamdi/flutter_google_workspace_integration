@@ -1,0 +1,60 @@
+name: Test
+
+on:
+  push:
+    branches: [main, development, "sales-prep/**"]
+  pull_request:
+    branches: [main, development]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: '3.24.3'
+          cache: true
+
+      - name: Restore pub cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.pub-cache
+          key: pub-${{ runner.os }}-${{ hashFiles('pubspec.lock') }}
+          restore-keys: pub-${{ runner.os }}-
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Run codegen
+        run: dart run build_runner build --delete-conflicting-outputs
+
+      - name: Generate localizations
+        run: flutter gen-l10n
+
+      - name: Run unit tests with coverage
+        run: flutter test --coverage --reporter expanded
+
+      - name: Upload coverage
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: coverage
+          path: coverage/lcov.info
+          retention-days: 14
+
+      - name: Coverage gate (informational)
+        if: always()
+        run: |
+          if [ -f coverage/lcov.info ]; then
+            lines_hit=$(grep -c '^DA:.*,[1-9]' coverage/lcov.info || true)
+            lines_total=$(grep -c '^DA:' coverage/lcov.info || true)
+            if [ "$lines_total" -gt 0 ]; then
+              pct=$((lines_hit * 100 / lines_total))
+              echo "Coverage: ${pct}% ($lines_hit / $lines_total lines)"
+            fi
+          fi
