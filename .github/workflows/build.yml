@@ -28,7 +28,7 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: stable
-          flutter-version: '3.27.4'
+          flutter-version: '3.24.5'
           cache: true
 
       - name: Install deps
@@ -67,7 +67,7 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: stable
-          flutter-version: '3.27.4'
+          flutter-version: '3.24.5'
           cache: true
       - run: flutter pub get
       - run: dart run build_runner build --delete-conflicting-outputs
@@ -88,7 +88,7 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: stable
-          flutter-version: '3.27.4'
+          flutter-version: '3.24.5'
           cache: true
       - run: flutter pub get
       - run: dart run build_runner build --delete-conflicting-outputs
