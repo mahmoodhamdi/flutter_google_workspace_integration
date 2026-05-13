@@ -13,9 +13,13 @@ class HomePage extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(config.appName),
-        actions: const <Widget>[
-          AccountSwitcher(),
-          SizedBox(width: 8),
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.settings_outlined),
+            onPressed: () => context.push('/home/settings'),
+          ),
+          const AccountSwitcher(),
+          const SizedBox(width: 8),
         ],
       ),
       body: SafeArea(

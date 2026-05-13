@@ -16,6 +16,7 @@ import 'package:google_apis_flutter/features/google_meet/presentation/screens/me
 import 'package:google_apis_flutter/features/google_sheets/presentation/screens/spreadsheet_list_screen.dart';
 import 'package:google_apis_flutter/features/google_sheets/presentation/screens/spreadsheet_viewer_screen.dart';
 import 'package:google_apis_flutter/features/home/presentation/pages/home_page.dart';
+import 'package:google_apis_flutter/features/settings/settings_screen.dart';
 
 final Provider<GoRouter> appRouterProvider = Provider<GoRouter>((Ref ref) {
   final config = AppConfig.fromEnvironment();
@@ -110,6 +111,11 @@ final Provider<GoRouter> appRouterProvider = Provider<GoRouter>((Ref ref) {
           GoRoute(
             path: 'meetings',
             builder: (_, __) => const MeetingsScreen(),
+          ),
+          // Settings
+          GoRoute(
+            path: 'settings',
+            builder: (_, __) => const SettingsScreen(),
           ),
         ],
       ),
