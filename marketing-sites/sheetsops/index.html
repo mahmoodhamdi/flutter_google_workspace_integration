@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SheetsOps — Turn Sheets into Mobile Dashboards</title>
+  <meta name="description" content="Real-time dashboards from Google Sheets. KPI cards, threshold alerts, mobile-first. For ops teams who live in spreadsheets." />
+  <style>
+    :root { --primary: #DC2626; --primary-dark: #B91C1C; --text: #0F172A; --text-light: #475569; --bg: #FFFFFF; --bg-alt: #FEF2F2; --border: #E2E8F0; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; color: var(--text); line-height: 1.6; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+    header { padding: 64px 0 32px; text-align: center; background: linear-gradient(180deg, #FEE2E2, #FFFFFF); }
+    header h1 { font-size: 48px; font-weight: 800; margin-bottom: 16px; color: var(--primary-dark); }
+    header .tagline { font-size: 20px; color: var(--text-light); max-width: 700px; margin: 0 auto 32px; }
+    .cta { display: inline-block; padding: 14px 28px; background: var(--primary); color: #FFFFFF; text-decoration: none; border-radius: 8px; font-weight: 600; }
+    .cta-secondary { background: #FFFFFF; color: var(--primary); border: 2px solid var(--primary); margin-left: 12px; }
+    section { padding: 64px 0; }
+    section.alt { background: var(--bg-alt); }
+    h2 { font-size: 32px; font-weight: 700; margin-bottom: 12px; text-align: center; }
+    h2 + .sub { text-align: center; color: var(--text-light); margin-bottom: 48px; }
+    .grid { display: grid; gap: 24px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+    .card { padding: 24px; border: 1px solid var(--border); border-radius: 12px; background: #FFFFFF; }
+    .card h3 { font-size: 18px; margin-bottom: 8px; color: var(--primary); }
+    .card p { color: var(--text-light); font-size: 15px; }
+    .pricing { display: grid; gap: 24px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); max-width: 900px; margin: 0 auto; }
+    .price { padding: 32px; border-radius: 16px; border: 1px solid var(--border); text-align: center; background: #FFFFFF; }
+    .price.featured { border-color: var(--primary); border-width: 2px; }
+    .price .amount { font-size: 36px; font-weight: 800; margin-bottom: 4px; }
+    .price ul { list-style: none; text-align: left; margin: 24px 0; }
+    .price li { padding: 6px 0; color: var(--text-light); }
+    .price li::before { content: "✓ "; color: var(--primary); font-weight: bold; }
+    footer { padding: 32px 0; border-top: 1px solid var(--border); text-align: center; color: var(--text-light); font-size: 14px; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>📊 SheetsOps</h1>
+      <p class="tagline">Turn any Google Sheet into a beautiful real-time mobile dashboard. KPI cards, threshold alerts, mobile-first viewing — for ops teams who live in spreadsheets.</p>
+      <a class="cta" href="#pricing">License the source</a>
+      <a class="cta cta-secondary" href="#features">See features</a>
+    </div>
+  </header>
+
+  <section id="features">
+    <div class="container">
+      <h2>From spreadsheet to dashboard in 30 seconds</h2>
+      <p class="sub">Build the dashboard your team needs without buying a BI tool.</p>
+      <div class="grid">
+        <div class="card">
+          <h3>Auto-chart from sheet data</h3>
+          <p>Point at a range. SheetsOps detects time series, categorical splits, KPIs — and renders charts that don't look like Excel from 2008.</p>
+        </div>
+        <div class="card">
+          <h3>KPI cards with targets</h3>
+          <p>Define a cell as a target, another as the current value. SheetsOps shows the variance as red/green and trend-line history.</p>
+        </div>
+        <div class="card">
+          <h3>Threshold alerts</h3>
+          <p>"Notify me when cell B7 > 1000". Get a push notification the moment your team hits a milestone or a metric tanks.</p>
+        </div>
+        <div class="card">
+          <h3>Mobile-first viewing</h3>
+          <p>Pinch-zoom data tables. Swipe between dashboards. Hold-to-preview a cell's formula. The interactions feel native, not bolted-on.</p>
+        </div>
+        <div class="card">
+          <h3>Real-time refresh</h3>
+          <p>Pull-to-refresh. Auto-refresh every 30s on metrics screens. Background refresh keeps dashboards warm on the lockscreen widget.</p>
+        </div>
+        <div class="card">
+          <h3>Share dashboards</h3>
+          <p>Generate a public link. Optional password protection. View-count analytics. No need to give Drive access — SheetsOps proxies safely.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="container">
+      <h2>Pricing</h2>
+      <div class="pricing">
+        <div class="price">
+          <div class="amount">$2,000</div>
+          <ul>
+            <li>Full source code</li>
+            <li>Single end-product</li>
+            <li>6 months updates</li>
+          </ul>
+          <a class="cta" href="mailto:sales@sheetsops.app">Self-hosted</a>
+        </div>
+        <div class="price featured">
+          <div class="amount">$6,000</div>
+          <ul>
+            <li>White-label, unlimited products</li>
+            <li>12 months updates + support</li>
+            <li>Onboarding session</li>
+          </ul>
+          <a class="cta" href="mailto:sales@sheetsops.app">White-label</a>
+        </div>
+        <div class="price">
+          <div class="amount">$20,000</div>
+          <ul>
+            <li>White-label license</li>
+            <li>Custom dashboard development</li>
+            <li>SLA support</li>
+          </ul>
+          <a class="cta" href="mailto:sales@sheetsops.app">Enterprise</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>© 2026 SheetsOps. Part of the Workspace Hub family.</p>
+    </div>
+  </footer>
+</body>
+</html>
