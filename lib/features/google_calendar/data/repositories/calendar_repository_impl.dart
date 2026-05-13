@@ -8,6 +8,7 @@ import 'package:google_apis_flutter/features/google_calendar/data/datasources/ca
 import 'package:google_apis_flutter/features/google_calendar/data/models/calendar_event_mapper.dart';
 import 'package:google_apis_flutter/features/google_calendar/domain/entities/calendar_event.dart';
 import 'package:google_apis_flutter/features/google_calendar/domain/repositories/calendar_repository.dart';
+import 'package:googleapis/calendar/v3.dart' as gcal;
 
 class CalendarRepositoryImpl implements CalendarRepository {
   CalendarRepositoryImpl(this._remote);
@@ -17,8 +18,9 @@ class CalendarRepositoryImpl implements CalendarRepository {
   Future<Result<List<CalendarSummary>>> listCalendars() =>
       guardWithRetry<List<CalendarSummary>>(() async {
         final r = await _remote.listCalendars();
-        return (r.items ?? <dynamic>[])
-            .map(CalendarEventMapper.toCalendarSummary)
+        final items = r.items ?? const <gcal.CalendarListEntry>[];
+        return items
+            .map<CalendarSummary>(CalendarEventMapper.toCalendarSummary)
             .toList(growable: false);
       }, operation: 'calendar.listCalendars');
 
@@ -41,7 +43,8 @@ class CalendarRepositoryImpl implements CalendarRepository {
         query: query,
         pageToken: pageToken,
       );
-      final events = (r.items ?? <dynamic>[])
+      final items = r.items ?? const <gcal.Event>[];
+      final events = items
           .map<CalendarEvent>(
             (e) => CalendarEventMapper.toEvent(e, calendarId),
           )

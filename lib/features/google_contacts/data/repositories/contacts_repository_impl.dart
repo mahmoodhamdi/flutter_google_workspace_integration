@@ -4,6 +4,7 @@ import 'package:google_apis_flutter/features/google_contacts/data/datasources/co
 import 'package:google_apis_flutter/features/google_contacts/data/models/contact_mapper.dart';
 import 'package:google_apis_flutter/features/google_contacts/domain/entities/contact.dart';
 import 'package:google_apis_flutter/features/google_contacts/domain/repositories/contacts_repository.dart';
+import 'package:googleapis/people/v1.dart' as gpeople;
 
 class ContactsRepositoryImpl implements ContactsRepository {
   ContactsRepositoryImpl(this._remote);
@@ -23,8 +24,8 @@ class ContactsRepositoryImpl implements ContactsRepository {
             pageSize: pageSize,
             pageToken: token,
           );
-          list.addAll((r.connections ?? <dynamic>[])
-              .map<Contact>(ContactMapper.toDomain));
+          final conns = r.connections ?? const <gpeople.Person>[];
+          list.addAll(conns.map<Contact>(ContactMapper.toDomain));
           token = r.nextPageToken;
           if (token == null || token.isEmpty) break;
         }
@@ -41,8 +42,10 @@ class ContactsRepositoryImpl implements ContactsRepository {
       guardWithRetry<List<Contact>>(() async {
         if (query.trim().isEmpty) return const <Contact>[];
         final r = await _remote.search(query.trim());
-        final results = (r.results ?? <dynamic>[])
-            .map<Contact>((res) => ContactMapper.toDomain(res.person))
+        final raw = r.results ?? const <gpeople.SearchResult>[];
+        final results = raw
+            .where((res) => res.person != null)
+            .map<Contact>((res) => ContactMapper.toDomain(res.person!))
             .toList();
         return results.take(limit).toList();
       }, operation: 'contacts.search');

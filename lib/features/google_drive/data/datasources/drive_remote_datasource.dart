@@ -92,7 +92,11 @@ class DriveRemoteDataSource {
       onProgress?.call(sent, length);
       return chunk;
     });
-    final media = gdrive.Media(tracked, length, contentType: mimeType);
+    final media = gdrive.Media(
+      tracked,
+      length,
+      contentType: mimeType ?? 'application/octet-stream',
+    );
     return api.files.create(
       gdrive.File(
         name: name,

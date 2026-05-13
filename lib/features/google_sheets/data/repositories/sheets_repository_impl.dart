@@ -4,6 +4,8 @@ import 'package:google_apis_flutter/features/google_sheets/data/datasources/shee
 import 'package:google_apis_flutter/features/google_sheets/data/models/sheets_mapper.dart';
 import 'package:google_apis_flutter/features/google_sheets/domain/entities/spreadsheet.dart';
 import 'package:google_apis_flutter/features/google_sheets/domain/repositories/sheets_repository.dart';
+import 'package:googleapis/drive/v3.dart' as gdrive;
+import 'package:googleapis/sheets/v4.dart' as gsheets;
 
 class SheetsRepositoryImpl implements SheetsRepository {
   SheetsRepositoryImpl(this._remote);
@@ -13,7 +15,8 @@ class SheetsRepositoryImpl implements SheetsRepository {
   Future<Result<List<Spreadsheet>>> listSpreadsheets({String? query}) =>
       guardWithRetry<List<Spreadsheet>>(() async {
         final list = await _remote.listSpreadsheetsViaDrive(query: query);
-        return (list.files ?? <dynamic>[])
+        final files = list.files ?? const <gdrive.File>[];
+        return files
             .map<Spreadsheet>(SheetsMapper.toDomainFromDrive)
             .toList(growable: false);
       }, operation: 'sheets.list');
@@ -88,7 +91,8 @@ class SheetsRepositoryImpl implements SheetsRepository {
           rangeToValues: rangeToValues,
           valueInputOption: valueInputOption,
         );
-        return (v.responses ?? <dynamic>[])
+        final responses = v.responses ?? const <gsheets.UpdateValuesResponse>[];
+        return responses
             .map<SheetUpdateResult>(
                 (r) => SheetsMapper.toUpdateResult(r, spreadsheetId))
             .toList(growable: false);

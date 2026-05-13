@@ -6,6 +6,7 @@ import 'package:google_apis_flutter/features/google_drive/data/datasources/drive
 import 'package:google_apis_flutter/features/google_drive/data/models/drive_file_mapper.dart';
 import 'package:google_apis_flutter/features/google_drive/domain/entities/drive_file.dart';
 import 'package:google_apis_flutter/features/google_drive/domain/repositories/drive_repository.dart';
+import 'package:googleapis/drive/v3.dart' as gdrive;
 
 class DriveRepositoryImpl implements DriveRepository {
   DriveRepositoryImpl(this._remote);
@@ -29,8 +30,9 @@ class DriveRepositoryImpl implements DriveRepository {
           pageSize: pageSize,
           orderBy: orderBy,
         );
+        final files = r.files ?? const <gdrive.File>[];
         return DriveFileList(
-          files: (r.files ?? <dynamic>[])
+          files: files
               .map<DriveFile>(DriveFileMapper.toDomain)
               .toList(growable: false),
           nextPageToken: r.nextPageToken,
