@@ -52,9 +52,23 @@ android {
 
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
+            // Sign with debug keys so CI can produce APKs without secrets.
+            // Real release builds substitute their own signing config.
             signingConfig = signingConfigs.debug
+            // Disable R8 shrinking for v1.0 — adding proper ProGuard rules
+            // for all transitive libraries is a v1.1 concern. The APK is
+            // larger but every plugin still works.
+            minifyEnabled false
+            shrinkResources false
+        }
+    }
+    packagingOptions {
+        resources {
+            excludes += [
+                'META-INF/AL2.0',
+                'META-INF/LGPL2.1',
+                'META-INF/*.kotlin_module',
+            ]
         }
     }
 }
