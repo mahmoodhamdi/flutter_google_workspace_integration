@@ -1,0 +1,78 @@
+{
+  "@@locale": "en",
+  "appTitle": "Workspace Hub",
+  "@appTitle": {
+    "description": "Application title"
+  },
+
+  "signInTitle": "Sign in",
+  "signInWithGoogle": "Sign in with Google",
+  "signInWithEmail": "Sign in with email instead",
+  "register": "Create an account",
+  "email": "Email",
+  "password": "Password",
+  "confirmPassword": "Confirm password",
+  "displayName": "Name (optional)",
+  "passwordMinLength": "Min {n} characters",
+  "@passwordMinLength": {
+    "placeholders": {
+      "n": {"type": "int"}
+    }
+  },
+  "invalidEmail": "Enter a valid email",
+  "passwordsDontMatch": "Passwords do not match",
+  "signOut": "Sign out",
+  "addAccount": "Add another account",
+
+  "calendar": "Calendar",
+  "drive": "Drive",
+  "sheets": "Sheets",
+  "compose": "Compose",
+  "contacts": "Contacts",
+  "map": "Map",
+  "meetings": "Meetings",
+
+  "newEvent": "New event",
+  "editEvent": "Edit event",
+  "deleteEvent": "Delete event",
+  "eventTitle": "Title",
+  "eventDescription": "Description",
+  "eventLocation": "Location",
+  "eventAttendees": "Attendees (emails)",
+  "allDay": "All day",
+  "starts": "Starts",
+  "ends": "Ends",
+  "addMeetLink": "Add Google Meet link",
+  "reminder": "Reminder",
+  "save": "Save",
+  "cancel": "Cancel",
+
+  "upload": "Upload",
+  "newFolder": "New folder",
+  "rename": "Rename",
+  "share": "Share",
+  "delete": "Delete",
+  "shareWithEmail": "Share with email",
+
+  "send": "Send",
+  "to": "To",
+  "cc": "Cc",
+  "bcc": "Bcc",
+  "subject": "Subject",
+  "messageSent": "Message sent",
+
+  "searchContacts": "Search contacts",
+  "noContacts": "No contacts",
+  "newContact": "New contact",
+  "deleteContact": "Delete contact?",
+
+  "loading": "Loading…",
+  "retry": "Retry",
+  "errorGeneric": "Something went wrong. Please try again.",
+  "noConnection": "No internet connection",
+  "sessionExpired": "Your session has expired. Please sign in again.",
+
+  "unlockToAccess": "Unlock to access your workspace",
+  "locked": "Locked",
+  "unlock": "Unlock"
+}

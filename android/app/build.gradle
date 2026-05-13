@@ -25,34 +25,59 @@ if (flutterVersionName == null) {
 
 android {
     namespace = "com.example.google_apis_flutter"
-    compileSdk = flutter.compileSdkVersion
+    compileSdk = 34
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+        // Required for flutter_local_notifications (uses java.time on API < 26).
+        coreLibraryDesugaringEnabled = true
+    }
+
+    kotlinOptions {
+        jvmTarget = "11"
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId = "com.example.google_apis_flutter"
-        // You can update the following values to match your application needs.
-        // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
-        minSdk = flutter.minSdkVersion
-        targetSdk = flutter.targetSdkVersion
+        // minSdk 23 required by firebase_auth 5.x (Auth SDK 23.2.1 needs >= 23).
+        // local_auth and several other plugins are also fine on 23+.
+        minSdk = 23
+        targetSdk = 34
         versionCode = flutterVersionCode.toInteger()
         versionName = flutterVersionName
+        multiDexEnabled = true
     }
 
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
+            // Sign with debug keys so CI can produce APKs without secrets.
+            // Real release builds substitute their own signing config.
             signingConfig = signingConfigs.debug
+            // Disable R8 shrinking for v1.0 — adding proper ProGuard rules
+            // for all transitive libraries is a v1.1 concern. The APK is
+            // larger but every plugin still works.
+            minifyEnabled false
+            shrinkResources false
+        }
+    }
+    packagingOptions {
+        resources {
+            excludes += [
+                'META-INF/AL2.0',
+                'META-INF/LGPL2.1',
+                'META-INF/*.kotlin_module',
+            ]
         }
     }
 }
 
 flutter {
     source = "../.."
+}
+
+dependencies {
+    coreLibraryDesugaring "com.android.tools:desugar_jdk_libs:2.1.4"
+    implementation "androidx.multidex:multidex:2.0.1"
 }

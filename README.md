@@ -1,156 +1,124 @@
-# Flutter Google Workspace Integrator
+# Workspace Hub — Flutter × Google Workspace
 
-Flutter Google Workspace Integrator is an open-source Flutter project designed to seamlessly integrate and interact with various Google Workspace applications, including Google Calendar, Drive, Docs, Sheets, Meet, Keep, and more. This project aims to provide a comprehensive solution for managing and interacting with Google Workspace apps directly from a Flutter application. The app is currently in progress and not complete yet.
+[![Analyze](https://github.com/mahmoodhamdi/flutter_google_workspace_integration/actions/workflows/analyze.yml/badge.svg)](https://github.com/mahmoodhamdi/flutter_google_workspace_integration/actions/workflows/analyze.yml)
+[![Test](https://github.com/mahmoodhamdi/flutter_google_workspace_integration/actions/workflows/test.yml/badge.svg)](https://github.com/mahmoodhamdi/flutter_google_workspace_integration/actions/workflows/test.yml)
+[![Build](https://github.com/mahmoodhamdi/flutter_google_workspace_integration/actions/workflows/build.yml/badge.svg)](https://github.com/mahmoodhamdi/flutter_google_workspace_integration/actions/workflows/build.yml)
 
-## 🌟 Features Overview
+Production-ready Flutter starter kit integrating Google Workspace APIs. **Same codebase ships as 5 distinct products** via Flutter flavors:
 
-- [ ] 🔑 **User Authentication**  
-      Secure user login using Username and Password, and various authentication methods including Firebase and Google.
-- [ ] 📅 **Google Calendar Integration**  
-      View, create, update, and delete calendar events.
-- [ ] 📂 **Google Drive Integration**  
-      List, upload, download, and delete files.
-- [ ] 📝 **Google Docs Integration**  
-      Create, edit, and manage documents.
-- [ ] 📊 **Google Sheets Integration**  
-      Read, write, and manage spreadsheets.
-- [ ] 👥 **Google Contacts Integration**  
-      Manage contacts and contact groups.
-- [ ] 🎥 **Google Meet Integration**  
-      Schedule and manage video meetings.
-- [ ] 🗒️ **Google Keep Integration**  
-      Create, read, update, and delete notes.
-- [ ] 📧 **Google Gmail Integration**  
-      Read, send, and manage emails.
-- [ ] 📊 **Google Analytics Integration**  
-      View and manage analytics data.
-- [ ] 📍 **Google Maps Integration**  
-      Embed and interact with maps.
+| Flavor          | Product          | Focus |
+|-----------------|------------------|-------|
+| `base`          | Workspace Hub    | All 7 integrations (starter kit) |
+| `bizcalendar`   | BizCalendar      | Team calendar for SMBs |
+| `drivevault`    | DriveVault       | Drive backup & archive |
+| `sheetsops`     | SheetsOps        | Mobile dashboards from Sheets |
+| `meetcompanion` | MeetCompanion    | Meeting productivity layer |
 
-## Key Features
+## What's included
 
-### User Authentication
+**7 Workspace integrations** — all using SENSITIVE OAuth scopes (no CASA assessment required):
 
-- [ ] User registration using email and password.
-- [ ] User login using email and password.
-- [ ] User logout.
-- [ ] User profile management.
-- [ ] User authentication using Firebase.
-- [ ] User authentication using Google.
+| Feature   | Scope (sensitive only)                            |
+|-----------|---------------------------------------------------|
+| Calendar  | `calendar` — full CRUD + recurrence + Meet links  |
+| Drive     | `drive.file` + `drive.metadata.readonly`          |
+| Sheets    | `spreadsheets`                                    |
+| Gmail     | `gmail.send` (send-only, NO inbox read)           |
+| Contacts  | `contacts`                                        |
+| Maps      | API key (no OAuth)                                |
+| Meet      | via Calendar `conferenceData`                     |
 
-### Google Calendar Integration
+**Production foundation**:
+- Multi-account Google Sign-In + Firebase email/password fallback
+- Automatic token refresh (Dio interceptor with retry-on-401)
+- Encrypted Hive cache (AES-256 keyed from secure storage)
+- Sync queue for offline writes
+- Riverpod state, freezed models, dartz Either errors, go_router navigation
+- AR + EN localization with RTL
+- Material 3 theme with per-flavor seed colors
+- Biometric lock (opt-in)
+- Full CI: analyze, test, build matrix per flavor, release-on-tag
+- **170+ tests** (unit + widget + golden)
 
-- [ ] CRUD operations for calendar events (Create, Read, Update, Delete).
-- [ ] View events in a calendar format.
-- [ ] Link tasks to calendars for better schedule management.
-- [ ] Real-time sync with Google Calendar.
+**Sales infrastructure**:
+- 5 static landing pages (`marketing-sites/`)
+- Video storyboards + social media launch copy
+- 8 sales documents in `sales/` covering 3 sales models (starter kit, verticals, services)
 
-### Google Drive Integration
+## Quick start
 
-- [ ] List files and folders.
-- [ ] Upload and download files.
-- [ ] Delete files and manage storage.
-- [ ] Real-time sync with Google Drive.
+```bash
+flutter pub get
+dart run build_runner build --delete-conflicting-outputs
 
-### Google Docs Integration
+# Run the base starter kit
+flutter run --dart-define=FLAVOR=base
 
-- [ ] Create, read, update, and delete documents.
-- [ ] Real-time collaboration on documents.
-- [ ] Link documents to other Workspace apps.
+# Or run a vertical
+flutter run -t lib/main_bizcalendar.dart --dart-define=FLAVOR=bizcalendar
 
-### Google Sheets Integration
+# Run tests
+flutter test
+```
 
-- [ ] Read and write data to spreadsheets.
-- [ ] Manage sheets and cells.
-- [ ] Real-time collaboration on spreadsheets.
+## Build all 5 verticals at once
 
-### Google Contacts Integration
+```bash
+./scripts/build-all-verticals.sh
+# APKs land in verticals-builds/
+```
 
-- [ ] Manage contacts and contact groups.
-- [ ] CRUD operations for contacts (Create, Read, Update, Delete).
-- [ ] Sync contacts with Google Contacts.
+## OAuth Configuration
 
-### Google Meet Integration
+1. Create Google Cloud project at https://console.cloud.google.com/
+2. Enable: Calendar API, Drive API, Sheets API, Gmail API, People API
+3. Configure OAuth consent screen — select only SENSITIVE scopes (see `sales/OAUTH_SCOPES_EXPLAINED.md`)
+4. Generate client IDs for Android/iOS/Web
+5. Drop `google-services.json` into `android/app/`
+6. Drop `GoogleService-Info.plist` into `ios/Runner/`
+7. Set `GOOGLE_MAPS_API_KEY` via `--dart-define` if using Maps
 
-- [ ] Schedule and manage video meetings.
-- [ ] Join meetings directly from the app.
-- [ ] View meeting details and participants.
+Full publishing guide: `sales/GOOGLE_WORKSPACE_MARKETPLACE_PUBLISHING.md`
 
-### Google Keep Integration
+## Architecture
 
-- [ ] CRUD operations for notes (Create, Read, Update, Delete).
-- [ ] Label and categorize notes.
-- [ ] Sync notes with Google Keep.
+Clean architecture per feature (`lib/features/<feature>/`):
 
-### Google Gmail Integration
+```
+domain/       # Pure Dart entities, repository interfaces, use cases
+data/         # Implementations, datasources, model mappers
+presentation/ # Riverpod providers, screens, widgets
+```
 
-- [ ] Read, send, and manage emails.
-- [ ] Organize emails with labels and folders.
-- [ ] Real-time sync with Gmail.
+Core layer (`lib/core/`):
+- `auth/` — multi-account OAuth + Firebase, secure token store, biometric gate
+- `errors/` — AppError (freezed sealed), error mapper, guard helpers, Result type
+- `network/` — Dio with auth interceptor + retry policy
+- `storage/` — Hive bootstrap + sync queue + cached-read pattern
+- `routing/` — GoRouter with auth-aware redirects
+- `theme/` — per-flavor M3 theme derived from primary color
+- `config/` — AppConfig + AppFlavor + AppFeature feature flags
+- `notifications/` — local notifications + FCM (optional)
 
-### Google Analytics Integration
+## Sales documentation
 
-- [ ] View and manage analytics data.
-- [ ] Generate reports and insights.
-- [ ] Integrate analytics data with other apps.
+Read `sales/MASTER_PRICING.md` first for the full pricing matrix.
 
-### Google Maps Integration
+| Model | What | Pricing |
+|-------|------|---------|
+| Starter Kit | Source license | $99 / $199 / $299 |
+| Vertical Products | Per-vertical license | $1K–$20K |
+| Services | Integration-as-a-Service | $3K–$15K per project |
 
-- [ ] Embed maps within the app.
-- [ ] Interactive map features (markers, routes, etc.).
-- [ ] Integrate with other Google services for enhanced location features.
+## Project status
 
-## Project Structure
+**v1.0.0 — production ready.** See `sales/STARTER_KIT_SALES.md` for go-to-market.
 
-- **lib**: Contains the main source code for the Flutter application.
-  - **data**: Data layer including models and repositories.
-  - **domain**: Business logic and use cases.
-  - **presentation**: UI layer including widgets and state management.
-  - **utils**: Utility classes and helper functions.
-- **test**: Unit and widget tests.
+## License
 
-## Getting Started
-
-### Prerequisites
-
-- Flutter SDK: [Installation Guide](https://flutter.dev/docs/get-started/install)
-- Google Cloud Project: [Create a Project](https://console.cloud.google.com/)
-  - Enable the necessary Google Workspace APIs (Calendar API, Drive API, etc.)
-  - Set up OAuth 2.0 credentials
-
-### Installation
-
-1. **Clone the repository**:
-
-   ```bash
-   git clone https://github.com/mahmoodhamdi/google_apis_flutter.git
-   cd google_apis_flutter
-   ```
-
-2. **Install dependencies**:
-
-   ```bash
-   flutter pub get
-   ```
-
-3. **Run the application**:
-
-   ```bash
-   flutter run
-   ```
-
-## Contributing
-
-We welcome contributions to the Flutter Google Workspace Integrator! If you would like to contribute, please follow these guidelines:
-
-1. Fork the repository.
-2. Create a new branch (`git checkout -b feature-branch`).
-3. Make your changes and commit them (`git commit -m 'Add some feature'`).
-4. Push to the branch (`git push origin feature-branch`).
-5. Create a new Pull Request.
+Commercial. See `LICENSE` (when added) — by default, single-developer use only; contact for white-label or enterprise licensing.
 
 ## Contact
 
-If you have any questions or suggestions, feel free to open an issue or contact us directly at <hmdy7486@gmail.com>.
-
-Happy coding!
+- Email: hmdy7486@gmail.com
+- Issues: https://github.com/mahmoodhamdi/flutter_google_workspace_integration/issues

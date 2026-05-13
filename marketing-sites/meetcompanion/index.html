@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MeetCompanion — Get More From Every Google Meet</title>
+  <meta name="description" content="Pre-meeting prep, in-meeting notes synced to Drive, post-meeting follow-ups. The productivity layer Google Meet doesn't ship with." />
+  <style>
+    :root { --primary: #EA580C; --primary-dark: #C2410C; --text: #0F172A; --text-light: #475569; --bg: #FFFFFF; --bg-alt: #FFF7ED; --border: #E2E8F0; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; color: var(--text); line-height: 1.6; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+    header { padding: 64px 0 32px; text-align: center; background: linear-gradient(180deg, #FFEDD5, #FFFFFF); }
+    header h1 { font-size: 48px; font-weight: 800; margin-bottom: 16px; color: var(--primary-dark); }
+    header .tagline { font-size: 20px; color: var(--text-light); max-width: 700px; margin: 0 auto 32px; }
+    .cta { display: inline-block; padding: 14px 28px; background: var(--primary); color: #FFFFFF; text-decoration: none; border-radius: 8px; font-weight: 600; }
+    .cta-secondary { background: #FFFFFF; color: var(--primary); border: 2px solid var(--primary); margin-left: 12px; }
+    section { padding: 64px 0; }
+    section.alt { background: var(--bg-alt); }
+    h2 { font-size: 32px; font-weight: 700; margin-bottom: 12px; text-align: center; }
+    h2 + .sub { text-align: center; color: var(--text-light); margin-bottom: 48px; }
+    .grid { display: grid; gap: 24px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+    .card { padding: 24px; border: 1px solid var(--border); border-radius: 12px; background: #FFFFFF; }
+    .card h3 { font-size: 18px; margin-bottom: 8px; color: var(--primary); }
+    .card p { color: var(--text-light); font-size: 15px; }
+    .pricing { display: grid; gap: 24px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); max-width: 900px; margin: 0 auto; }
+    .price { padding: 32px; border-radius: 16px; border: 1px solid var(--border); text-align: center; background: #FFFFFF; }
+    .price.featured { border-color: var(--primary); border-width: 2px; }
+    .price .amount { font-size: 36px; font-weight: 800; margin-bottom: 4px; }
+    .price ul { list-style: none; text-align: left; margin: 24px 0; }
+    .price li { padding: 6px 0; color: var(--text-light); }
+    .price li::before { content: "✓ "; color: var(--primary); font-weight: bold; }
+    footer { padding: 32px 0; border-top: 1px solid var(--border); text-align: center; color: var(--text-light); font-size: 14px; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>🎥 MeetCompanion</h1>
+      <p class="tagline">The productivity layer Google Meet doesn't ship with. Pre-meeting prep, in-meeting notes synced to Drive, post-meeting follow-ups — all in one mobile app.</p>
+      <a class="cta" href="#pricing">License the source</a>
+      <a class="cta cta-secondary" href="#features">See features</a>
+    </div>
+  </header>
+
+  <section id="features">
+    <div class="container">
+      <h2>Better meetings start before you join</h2>
+      <p class="sub">MeetCompanion runs alongside Meet, not replacing it.</p>
+      <div class="grid">
+        <div class="card">
+          <h3>Pre-meeting prep card</h3>
+          <p>30 minutes before each call: agenda template, attendee LinkedIn bios (if shared), last-meeting notes, action items still open. Quick scan = better meeting.</p>
+        </div>
+        <div class="card">
+          <h3>In-meeting notes synced to Drive</h3>
+          <p>Take notes in a clean editor. Auto-saved to a Drive folder per recurring meeting. Searchable across all your past notes.</p>
+        </div>
+        <div class="card">
+          <h3>Auto-recording reminder</h3>
+          <p>The moment a meeting starts, MeetCompanion offers a one-tap toggle to enable recording. No more "wait, who's recording?"</p>
+        </div>
+        <div class="card">
+          <h3>Post-meeting follow-ups</h3>
+          <p>Extract action items from your notes. Auto-create reminders. Optional: email a summary to attendees via gmail.send.</p>
+        </div>
+        <div class="card">
+          <h3>Meeting cost & time tracker</h3>
+          <p>Total weekly meeting time. Estimated cost. Time-spent vs time-prepped ratio. Calendar-wide stats so you can argue for fewer meetings.</p>
+        </div>
+        <div class="card">
+          <h3>Insights from your calendar</h3>
+          <p>"You spend 12 hours/week in meetings". "Wednesdays are your worst meeting day". Useful patterns extracted from your Calendar — fully on-device.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="container">
+      <h2>Pricing</h2>
+      <div class="pricing">
+        <div class="price">
+          <div class="amount">$1,000</div>
+          <ul>
+            <li>Full source code</li>
+            <li>Single end-product</li>
+            <li>6 months updates</li>
+          </ul>
+          <a class="cta" href="mailto:sales@meetcompanion.app">Self-hosted</a>
+        </div>
+        <div class="price featured">
+          <div class="amount">$3,000</div>
+          <ul>
+            <li>White-label, unlimited products</li>
+            <li>12 months updates + support</li>
+          </ul>
+          <a class="cta" href="mailto:sales@meetcompanion.app">White-label</a>
+        </div>
+        <div class="price">
+          <div class="amount">$10,000</div>
+          <ul>
+            <li>White-label license</li>
+            <li>Custom feature development</li>
+            <li>SLA support</li>
+          </ul>
+          <a class="cta" href="mailto:sales@meetcompanion.app">Enterprise</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>© 2026 MeetCompanion. Part of the Workspace Hub family.</p>
+    </div>
+  </footer>
+</body>
+</html>
